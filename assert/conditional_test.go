@@ -61,3 +61,37 @@ func TestNotEqualsFail(t *testing.T) {
 		})
 	}
 }
+
+func TestGreaterThan(t *testing.T) {
+	t.Parallel()
+
+	a.GreaterThan(t, 2, 1)
+}
+
+func TestGreaterThanFail(t *testing.T) {
+	t.Parallel()
+
+	a.ShouldFailTest(t, func(mockTest *testing.T) {
+		a.GreaterThan(mockTest, 1, 2)
+	})
+	a.ShouldFailTest(t, func(mockTest *testing.T) {
+		a.GreaterThan(mockTest, 1, 1)
+	})
+}
+
+func TestLessThan(t *testing.T) {
+	t.Parallel()
+
+	a.LessThan(t, 1, 2)
+}
+
+func TestLessThanFail(t *testing.T) {
+	t.Parallel()
+
+	a.ShouldFailTest(t, func(mockTest *testing.T) {
+		a.LessThan(mockTest, 2, 1)
+	})
+	a.ShouldFailTest(t, func(mockTest *testing.T) {
+		a.LessThan(mockTest, 1, 1)
+	})
+}
