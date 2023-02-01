@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type rateLimiter struct {
+type RateLimiter struct {
 	interval time.Duration
 	limit    int
 	count    int
@@ -15,8 +15,8 @@ type rateLimiter struct {
 // create a new rate limiter
 //
 // rate limiters are useful for limiting the number of requests made to an API in a given interval
-func NewRateLimiter(interval time.Duration, limit int) *rateLimiter {
-	rl := &rateLimiter{
+func NewRateLimiter(interval time.Duration, limit int) *RateLimiter {
+	rl := &RateLimiter{
 		interval: interval,
 		limit:    limit,
 		count:    0,
@@ -29,7 +29,7 @@ func NewRateLimiter(interval time.Duration, limit int) *rateLimiter {
 }
 
 // run the rate limiter
-func (rl *rateLimiter) run() {
+func (rl *RateLimiter) run() {
 	for {
 		// if count hits limit, wait for ticker channel to reset the count
 		if rl.count >= rl.limit {
@@ -49,22 +49,22 @@ func (rl *rateLimiter) run() {
 }
 
 // start the rate limiter ticker
-func (rl *rateLimiter) Reset() {
+func (rl *RateLimiter) Reset() {
 	rl.ticker.Reset(rl.interval)
 }
 
 // change the rate limiter interval
-func (rl *rateLimiter) ChangeInterval(interval time.Duration) {
+func (rl *RateLimiter) ChangeInterval(interval time.Duration) {
 	rl.interval = interval
 	rl.Reset()
 }
 
 // wait for running channel to be true again
-func (rl *rateLimiter) Wait() {
+func (rl *RateLimiter) Wait() {
 	<-rl.running
 }
 
 // stop the rate limiter ticker
-func (rl *rateLimiter) Stop() {
+func (rl *RateLimiter) Stop() {
 	rl.ticker.Stop()
 }
