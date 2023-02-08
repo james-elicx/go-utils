@@ -1,6 +1,7 @@
 package a_test
 
 import (
+	"errors"
 	"testing"
 
 	a "github.com/james-elicx/go-utils/assert"
@@ -60,6 +61,18 @@ func TestNotEqualsFail(t *testing.T) {
 			a.NotEquals(mockTest, c.a, c.b)
 		})
 	}
+}
+
+func TestEqualsError(t *testing.T) {
+	t.Parallel()
+
+	a.EqualsError(t, errors.New("test"), "test")
+}
+
+func TestNotEqualsError(t *testing.T) {
+	t.Parallel()
+
+	a.NotEqualsError(t, errors.New("test"), "not test")
 }
 
 func TestGreaterThan(t *testing.T) {
