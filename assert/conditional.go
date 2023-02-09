@@ -10,7 +10,11 @@ func Equals(t *testing.T, a, b interface{}) {
 	}
 }
 
-func EqualsError(t *testing.T, a error, b interface{}) {
+func EqualsError(t *testing.T, a, b error) {
+	Equals(t, a, b)
+}
+
+func EqualsErrorMessage(t *testing.T, a error, b string) {
 	Equals(t, a.Error(), b)
 }
 
@@ -31,7 +35,11 @@ func NotEquals(t *testing.T, a, b interface{}) {
 	}
 }
 
-func NotEqualsError(t *testing.T, a error, b interface{}) {
+func NotEqualsError(t *testing.T, a, b error) {
+	NotEquals(t, a, b)
+}
+
+func NotEqualsErrorMessage(t *testing.T, a error, b interface{}) {
 	NotEquals(t, a.Error(), b)
 }
 
