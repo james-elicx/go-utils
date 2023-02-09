@@ -75,6 +75,44 @@ func TestNotEqualsError(t *testing.T) {
 	a.NotEqualsError(t, errors.New("test"), "not test")
 }
 
+func TestEqualsArray(t *testing.T) {
+	t.Parallel()
+
+	a.EqualsArray(t, []int{1, 2, 3}, []int{1, 2, 3})
+	a.EqualsArray(t, []string{"a", "b", "c"}, []string{"a", "b", "c"})
+	a.EqualsArray(t, []byte{1, 2, 3}, []byte{1, 2, 3})
+	a.EqualsArray(t, []bool{true, false, true}, []bool{true, false, true})
+	a.EqualsArray(t, []interface{}{1, "a", true}, []interface{}{1, "a", true})
+	a.EqualsArray(t, []byte{}, []byte{})
+}
+
+func TestEqualsArrayFails(t *testing.T) {
+	t.Parallel()
+
+	a.ShouldFailTest(t, func(mockTest *testing.T) {
+		a.EqualsArray(mockTest, []int{1, 2, 3}, []int{1, 2, 3, 4})
+	})
+}
+
+func TestNotEqualsArray(t *testing.T) {
+	t.Parallel()
+
+	a.NotEqualsArray(t, []int{1, 2, 3}, []int{1, 2, 3, 4})
+	a.NotEqualsArray(t, []string{"a", "b", "c"}, []string{"a", "b", "c", "d"})
+	a.NotEqualsArray(t, []byte{1, 2, 3}, []byte{1, 2, 3, 4})
+	a.NotEqualsArray(t, []bool{true, false, true}, []bool{true, false, true, false})
+	a.NotEqualsArray(t, []interface{}{1, "a", true}, []interface{}{1, "a", true, false})
+	a.NotEqualsArray(t, []byte{}, []byte{1})
+}
+
+func TestNotEqualsArrayFails(t *testing.T) {
+	t.Parallel()
+
+	a.ShouldFailTest(t, func(mockTest *testing.T) {
+		a.NotEqualsArray(mockTest, []int{1, 2, 3}, []int{1, 2, 3})
+	})
+}
+
 func TestGreaterThan(t *testing.T) {
 	t.Parallel()
 
