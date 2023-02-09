@@ -66,25 +66,34 @@ func TestNotEqualsFail(t *testing.T) {
 func TestEqualsError(t *testing.T) {
 	t.Parallel()
 
-	a.EqualsError(t, errors.New("test"), errors.New("test"))
+	errorInstance := errors.New("test")
+
+	a.EqualsError(t, errorInstance, errorInstance)
 }
 
 func TestNotEqualsError(t *testing.T) {
 	t.Parallel()
 
-	a.NotEqualsError(t, errors.New("test"), errors.New("not test"))
+	errorInstance := errors.New("test")
+	errorInstanceAlt := errors.New("not test")
+
+	a.NotEqualsError(t, errorInstance, errorInstanceAlt)
 }
 
 func TestEqualsErrorMessage(t *testing.T) {
 	t.Parallel()
 
-	a.EqualsErrorMessage(t, errors.New("test"), "test")
+	errorInstance := errors.New("test")
+
+	a.EqualsErrorMessage(t, errorInstance, "test")
 }
 
 func TestNotEqualsErrorMessage(t *testing.T) {
 	t.Parallel()
 
-	a.NotEqualsErrorMessage(t, errors.New("test"), "not test")
+	errorInstance := errors.New("test")
+
+	a.NotEqualsErrorMessage(t, errorInstance, "not test")
 }
 
 func TestEqualsArray(t *testing.T) {
